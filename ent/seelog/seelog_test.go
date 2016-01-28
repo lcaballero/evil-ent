@@ -6,11 +6,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/lcaballero/evil-ent/ent"
-	. "github.com/smartystreets/goconvey/convey"
-	"github.com/lcaballero/evil-ent/ent/lookup"
 	"fmt"
 	"reflect"
+
+	"github.com/lcaballero/evil-ent/ent"
+	"github.com/lcaballero/evil-ent/ent/lookup"
+	. "github.com/smartystreets/goconvey/convey"
 )
 
 func CaptureStdout(print func()) (string, error) {
@@ -84,7 +85,7 @@ func TestSeelogConsole(t *testing.T) {
 
 	Convey("Close sets logger to Closed", t, func() {
 		log, mock, err := NewLogWriterMocked()
-		defer func(){
+		defer func() {
 			recover()
 			log.Flush()
 			HasRecord(mock, "Error", "Hello panic\n")
@@ -119,9 +120,9 @@ func TestSeelogConsole(t *testing.T) {
 	Convey("Error produces expected output", t, func() {
 		log, mock, _ := NewLogWriterMocked()
 		mapping := lookup.NewLookup(log).MethodMap()
-		set := []string{ "Debugf", "Errorf", "Fatalf", "Infof", "Tracef", "Warnf" }
+		set := []string{"Debugf", "Errorf", "Fatalf", "Infof", "Tracef", "Warnf"}
 
-		for _,name := range set {
+		for _, name := range set {
 			face := mapping[name]
 			param := fmt.Sprintf("Hello %s", name)
 			params := []reflect.Value{
@@ -140,9 +141,9 @@ func TestSeelogConsole(t *testing.T) {
 	Convey("Error produces expected output", t, func() {
 		log, mock, _ := NewLogWriterMocked()
 		mapping := lookup.NewLookup(log).MethodMap()
-		set := []string{ "Debug", "Error", "Fatal", "Info", "Trace", "Warn" }
+		set := []string{"Debug", "Error", "Fatal", "Info", "Trace", "Warn"}
 
-		for _,name := range set {
+		for _, name := range set {
 			face := mapping[name]
 			param := fmt.Sprintf("Hello %s\n", name)
 			params := []reflect.Value{

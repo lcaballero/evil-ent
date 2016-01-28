@@ -7,9 +7,9 @@ type Lookup struct {
 }
 
 type Facet struct {
-	Method reflect.Method
-	Type   reflect.Type
-	Value  reflect.Value
+	Method  reflect.Method
+	Type    reflect.Type
+	Value   reflect.Value
 	ValueOf reflect.Value
 }
 
@@ -41,9 +41,9 @@ func (p *Lookup) Methods() []*Facet {
 
 	for i := range methods {
 		methods[i] = &Facet{
-			Method: ty.Method(i),
-			Type:   ty,
-			Value:  val.Method(i),
+			Method:  ty.Method(i),
+			Type:    ty,
+			Value:   val.Method(i),
 			ValueOf: val,
 		}
 	}
@@ -54,7 +54,7 @@ func (p *Lookup) Methods() []*Facet {
 func (p *Lookup) MethodMap() map[string]*Facet {
 	methods := p.Methods()
 	faces := make(map[string]*Facet)
-	for _,f := range methods {
+	for _, f := range methods {
 		faces[f.Name()] = f
 	}
 	return faces

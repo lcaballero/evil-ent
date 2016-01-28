@@ -3,12 +3,12 @@ package seelog
 import (
 	"testing"
 
-	. "github.com/smartystreets/goconvey/convey"
-	"github.com/lcaballero/evil-ent/ent/lookup"
 	"fmt"
 	"reflect"
-)
 
+	"github.com/lcaballero/evil-ent/ent/lookup"
+	. "github.com/smartystreets/goconvey/convey"
+)
 
 func HasRecord(log *MockLogger, key, val string) {
 	vals := log.Writes[key]
@@ -24,11 +24,11 @@ func TestMockLog(t *testing.T) {
 
 	Convey("Call all of the non-format logging methods.", t, func() {
 		log := NewMockLogger()
-		mapping  := lookup.NewLookup(log).MethodMap()
+		mapping := lookup.NewLookup(log).MethodMap()
 
-		set := []string{ "Debug", "Error", "Fatal", "Info", "Trace", "Warn" }
+		set := []string{"Debug", "Error", "Fatal", "Info", "Trace", "Warn"}
 
-		for _,name := range set {
+		for _, name := range set {
 			face := mapping[name]
 			param := fmt.Sprintf("Hello %s\n", name)
 			params := []reflect.Value{
@@ -48,7 +48,7 @@ func TestMockLog(t *testing.T) {
 			"Debugf", "Errorf", "Fatalf", "Infof", "Tracef", "Warnf",
 		}
 
-		for _,name := range set {
+		for _, name := range set {
 			face := mapping[name]
 			param := fmt.Sprintf("Hello %s", name)
 			params := []reflect.Value{
@@ -59,7 +59,6 @@ func TestMockLog(t *testing.T) {
 			HasRecord(log, name, param)
 		}
 	})
-
 
 	Convey("MockLogger should record Debugf(...) call.", t, func() {
 		log := NewMockLogger()

@@ -2,7 +2,6 @@ package ent
 
 import "io"
 
-
 type ExitStrategy func()
 
 // A LogWriter is a super-interface for all the writing an application might

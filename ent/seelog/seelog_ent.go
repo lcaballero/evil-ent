@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"os"
 
+	"errors"
+
 	"github.com/lcaballero/evil-ent/ent"
 	log "github.schq.secious.com/Logrhythm/Godeps/_workspace/src/github.com/cihub/seelog"
-	"errors"
 )
 
 // Can be overwritten for purposes of testing.
@@ -35,6 +36,7 @@ func NewSeeLogWriter(configxml string) (*SeeLogWriter, error) {
 		log.ReplaceLogger(logger)
 		logger.Info("replaced logger")
 	}
+	defer logger.Flush()
 
 	w := &SeeLogWriter{
 		Logger: logger,

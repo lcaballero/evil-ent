@@ -3,8 +3,8 @@ package seelog
 import "fmt"
 
 type MockLogger struct {
-	Writes   map[string][]string
-	IsClosed bool
+	Writes    map[string][]string
+	IsClosed  bool
 	IsFlushed bool
 }
 
